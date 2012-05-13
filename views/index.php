@@ -18,7 +18,7 @@ $id = isset($contact['contact_id']) ? "/".$contact['contact_id'] : '';
 		</div>
 
 		<div>
-			<?php echo form_label(lang('contact_form_name').' <span class="required">*</span>', 'email_address'); ?>
+			<?php echo form_label(lang('contact_form_email').' <span class="required">*</span>', 'email_address'); ?>
 			<input id="email_address" type="text" name="email_address" maxlength="150" value="<?php echo set_value('email_address', isset($contact['email_address']) ? $contact['email_address'] : ''); ?>"  />
 		</div>
 
