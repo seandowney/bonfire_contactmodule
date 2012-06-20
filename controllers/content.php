@@ -53,7 +53,7 @@ class Content extends Admin_Controller
 		
 		$records = $this->contact_model->find_all();
 
-		Template::set("data", $records);
+		Template::set("records", $records);
 		Template::set("toolbar_title", "Manage Contacts");
 		Template::render();
 		
