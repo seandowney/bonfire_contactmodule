@@ -38,6 +38,7 @@ class Content extends Admin_Controller
 		$this->load->model('contact_model');
 		$this->lang->load('contact');
 		
+		Template::set_block('sub_nav', 'content/_sub_nav');
 	}//end __construct()
 	
 	
@@ -50,7 +51,24 @@ class Content extends Admin_Controller
 	 */
 	public function index()
 	{
+		$offset = $this->uri->segment(5);
+		$where = array();
 		
+		$total_records = $this->contact_model->count_all();
+		Template::set('total_records', $total_records);
+
+		// Pagination
+		$this->load->library('pagination');
+
+		$this->pager['base_url'] = site_url(SITE_AREA .'/content/contact/index');
+		$this->pager['total_rows'] = $total_records;
+		$this->pager['per_page'] = $this->limit;
+		$this->pager['uri_segment']	= 5;
+
+		$this->pagination->initialize($this->pager);
+
+		$this->contact_model->limit($this->limit, $offset)->where($where);
+		$this->contact_model->select('*');
 		$records = $this->contact_model->find_all();
 
 		Template::set("records", $records);
